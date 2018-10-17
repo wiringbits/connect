@@ -1,13 +1,16 @@
 /* @flow */
 import type {
     TestFunction,
-    SubtestGetAddress,
 } from 'flowtype/tests';
 
 import type {
     TestTezosGetAddressPayload,
     ExpectedTezosGetAddressResponse,
 } from 'flowtype/tests/tezos-get-address';
+
+type ErrorResponse = {
+    success: false,
+}
 
 export const tezosGetAddress = (): TestFunction => {
     const testPayloads: Array<TestTezosGetAddressPayload> = [
@@ -33,7 +36,7 @@ export const tezosGetAddress = (): TestFunction => {
         },
     ];
 
-    const expectedResponses: Array<ExpectedTezosGetAddressResponse> = [
+    const expectedResponses: Array<ExpectedTezosGetAddressResponse | ErrorResponse> = [
         {
             payload: {
                 address: 'tz1ckrgqGGGBt4jGDmwFhtXc1LNpZJUnA9F2',

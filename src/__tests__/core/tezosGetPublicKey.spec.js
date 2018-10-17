@@ -8,6 +8,10 @@ import type {
     ExpectedTezosGetPublicKeyResponse,
 } from 'flowtype/tests/tezos-get-public-key';
 
+type ErrorResponse = {
+    success: false,
+}
+
 export const tezosGetPublicKey = (): TestFunction => {
     const testPayloads: Array<TestTezosGetPublicKeyPayload> = [
         {
@@ -32,7 +36,7 @@ export const tezosGetPublicKey = (): TestFunction => {
         },
     ];
 
-    const expectedResponses: Array<ExpectedTezosGetPublicKeyResponse> = [
+    const expectedResponses: Array<ExpectedTezosGetPublicKeyResponse | ErrorResponse> = [
         {
             payload: {
                 publicKey: 'edpkuxZ5W8c2jmcaGuCFZxRDSWxS7hp98zcwj2YpUZkJWs5F7UMuF6',
