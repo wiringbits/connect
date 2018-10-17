@@ -104,13 +104,14 @@ export default class TezosGetAddress extends AbstractMethod {
     async run(): Promise<TezosAddressResponse | Array<TezosAddressResponse>> {
         const responses: Array<TezosAddressResponse> = [];
         for (let i = 0; i < this.params.bundle.length; i++) {
+            const batch = this.params.bundle[i];
             const response: TezosAddress = await this.device.getCommands().tezosGetAddress(
-                this.params.bundle[i].path,
-                this.params.bundle[i].showOnTrezor
+                batch.path,
+                batch.showOnTrezor
             );
             responses.push({
-                path: this.params.bundle[i].path,
-                serializedPath: getSerializedPath(this.params.bundle[i].path),
+                path: batch.path,
+                serializedPath: getSerializedPath(batch.path),
                 address: response.address,
             });
 

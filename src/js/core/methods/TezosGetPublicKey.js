@@ -104,13 +104,14 @@ export default class TezosGetPublicKey extends AbstractMethod {
     async run(): Promise<TezosPublicKeyResponse | Array<TezosPublicKeyResponse>> {
         const responses: Array<TezosPublicKeyResponse> = [];
         for (let i = 0; i < this.params.bundle.length; i++) {
+            const batch = this.params.bundle[i];
             const response: TezosPublicKey = await this.device.getCommands().tezosGetPublicKey(
-                this.params.bundle[i].path,
-                this.params.bundle[i].showOnTrezor
+                batch.path,
+                batch.showOnTrezor
             );
             responses.push({
-                path: this.params.bundle[i].path,
-                serializedPath: getSerializedPath(this.params.bundle[i].path),
+                path: batch.path,
+                serializedPath: getSerializedPath(batch.path),
                 publicKey: response.public_key,
             });
 
