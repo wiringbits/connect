@@ -2,6 +2,12 @@
 
 import type { $Path, $Common } from './params';
 import type { Unsuccessful$ } from './response';
+import type {
+    TezosRevealOp,
+    TezosTransactionOp,
+    TezosOriginationOp,
+    TezosDelegationOp,
+} from './trezor';
 
 // get address
 
@@ -11,9 +17,8 @@ export type TezosAddress = {
     serializedPath: string,
 }
 
-export type $TezosGetAddress = {
+export type $TezosGetAddress = $Common & {
     path: $Path,
-    curve: 0 | 1 | 2,
     showOnTrezor?: boolean,
 }
 
@@ -29,7 +34,7 @@ export type TezosGetAddress$$ = {
 
 // get public key
 
-export type TezosPublicKey = {
+export type TezosPublicKey = $Common & {
     publicKey: string,
     path: Array<number>,
     serializedPath: string,
@@ -37,7 +42,6 @@ export type TezosPublicKey = {
 
 export type $TezosGetPublicKey = {
     path: $Path,
-    curve: 0 | 1 | 2,
     showOnTrezor?: boolean,
 }
 
@@ -51,72 +55,19 @@ export type TezosGetPublicKey$$ = {
     payload: Array<TezosPublicKey>,
 } | Unsuccessful$;
 
-export type TezosCurve =
-    0 | 1 | 2;
-
-export type TezosContractID = {
-    tag: Array<number>,
-    hash: string,
-}
-
-export type Reveal = {
-    source: TezosContractID,
-    fee: number,
-    counter: number,
-    gas_limit: number,
-    storage_limit: number,
-    public_key: Array<number>,
-}
-
-export type Transaction = {
-    source: TezosContractID,
-    destination: TezosContractID,
-    amount: number,
-    parameters?: Array<number>,
-    counter: number,
-    fee: number,
-    gas_limit: number,
-    storage_limit: number,
-}
-
-export type Origination = {
-    source: TezosContractID,
-    manager_pubkey: Array<number>,
-    balance: number,
-    spendable: boolean,
-    delegatable: boolean,
-    delegate: Array<number>,
-    script?: Array<number>,
-    fee: number,
-    counter: number,
-    gas_limit: number,
-    storage_limit: number,
-}
-
-export type Delegation = {
-    source: TezosContractID,
-    delegate: TezosContractID,
-    fee: number,
-    counter: number,
-    gas_limit: number,
-    storage_limit: number,
-}
+// sign transaction
 
 export type TezosOperation = {
-    reveal: Reveal,
-    transaction: Transaction,
-    origination: Origination,
-    delegation: Delegation,
+    reveal?: TezosRevealOp,
+    transaction?: TezosTransactionOp,
+    origination?: TezosOriginationOp,
+    delegation?: TezosDelegationOp,
 }
 
-export type $TezosSignTransaction = {
+export type $TezosSignTransaction = $Common & {
     address_n: Array<number>,
-    curve: TezosCurve,
-    branch: Array<number>,
-    reveal?: Reveal,
-    transaction?: Transaction,
-    origination?: Origination,
-    delegation?: Delegation,
+    branch: string,
+    operation: TezosOperation,
 }
 
 export type TezosSignedTx = {

@@ -508,7 +508,7 @@ type TezosContractID = {
     hash: string,
 }
 
-type TezosRevealOp = {
+export type TezosRevealOp = {
     source: TezosContractID,
     fee: number,
     counter: number,
@@ -517,7 +517,7 @@ type TezosRevealOp = {
     public_key: Array<number>,
 }
 
-type TezosTransactionOp = {
+export type TezosTransactionOp = {
     source: TezosContractID,
     destination: TezosContractID,
     amount: number,
@@ -528,7 +528,7 @@ type TezosTransactionOp = {
     storage_limit: number,
 }
 
-type TezosOriginationOp = {
+export type TezosOriginationOp = {
     source: TezosContractID,
     manager_pubkey: Array<number>,
     balance: number,
@@ -542,7 +542,7 @@ type TezosOriginationOp = {
     storage_limit: number,
 }
 
-type TezosDelegationOp = {
+export type TezosDelegationOp = {
     source: TezosContractID,
     delegate: TezosContractID,
     fee: number,
