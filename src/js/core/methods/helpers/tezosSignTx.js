@@ -5,19 +5,17 @@ import type { TezosOperation } from '../../../types/tezos';
 import type { TezosTransaction } from '../../../types/trezor';
 import { validateParams } from './../helpers/paramsValidator';
 
-export const createTx = (address_n: Array<number>, branch: Array<number>, operation: TezosOperation): TezosTransaction => {
-
+export const createTx = (address_n: Array<number>, branch: string, operation: TezosOperation): TezosTransaction => {
     let message: TezosTransaction = {
         address_n,
         branch,
-    }
+    };
 
-    // reveal public key 
-    if (operation.hasOwnProperty('reveal')) {
-
+    // reveal public key
+    if (operation.reveal) {
         const reveal = operation.reveal;
 
-        // validate reveal paramaters 
+        // validate reveal paramaters
         validateParams(reveal, [
             { name: 'source', obligatory: true },
             { name: 'public_key', obligatory: true },
@@ -26,7 +24,7 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
             { name: 'storage_limit', obligatory: true },
         ]);
 
-        // validate reveal source paramaters 
+        // validate reveal source paramaters
         validateParams(reveal.source, [
             { name: 'tag', obligatory: true },
             { name: 'hash', obligatory: true },
@@ -44,16 +42,15 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
                 counter: reveal.counter,
                 gas_limit: reveal.gas_limit,
                 storage_limit: reveal.storage_limit,
-            }
-        }
+            },
+        };
     }
 
-    // transaction 
-    if (operation.hasOwnProperty('transaction')) {
-
+    // transaction
+    if (operation.transaction) {
         const transaction = operation.transaction;
 
-        // validate transaction paramaters 
+        // validate transaction paramaters
         validateParams(transaction, [
             { name: 'source', obligatory: true },
             { name: 'destination', obligatory: true },
@@ -64,14 +61,14 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
             { name: 'storage_limit', obligatory: true },
         ]);
 
-        // validate transaction source paramaters 
+        // validate transaction source paramaters
         validateParams(transaction.source, [
             { name: 'tag', obligatory: true },
             { name: 'hash', obligatory: true },
         ]);
 
-        // validate transaction destination paramaters 
-        validateParams(transaction.source, [
+        // validate transaction destination paramaters
+        validateParams(transaction.destination, [
             { name: 'tag', obligatory: true },
             { name: 'hash', obligatory: true },
         ]);
@@ -92,31 +89,26 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
                 counter: transaction.counter,
                 gas_limit: transaction.gas_limit,
                 storage_limit: transaction.storage_limit,
-            }
-        }
+            },
+        };
 
         //  add parameters to transaction
         if (transaction.hasOwnProperty('parameters')) {
-
             message = {
                 ...message,
                 transaction: {
                     ...message.transaction,
                     parameters: transaction.parameters,
-                }
-            }
-
+                },
+            };
         }
-
     }
 
-
-    // origination 
-    if (operation.hasOwnProperty('origination')) {
-
+    // origination
+    if (operation.origination) {
         const origination = operation.origination;
 
-        // validate origination paramaters 
+        // validate origination paramaters
         validateParams(origination, [
             { name: 'source', obligatory: true },
             { name: 'manager_pubkey', obligatory: true },
@@ -130,7 +122,7 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
             { name: 'delegate', obligatory: true },
         ]);
 
-        // validate origination source paramaters 
+        // validate origination source paramaters
         validateParams(origination.source, [
             { name: 'tag', obligatory: true },
             { name: 'hash', obligatory: true },
@@ -153,29 +145,25 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
                 delegatable: origination.delegatable,
                 delegate: origination.delegate,
             },
-        }
+        };
 
         //  add script to origination
         if (origination.hasOwnProperty('script')) {
-
             message = {
                 ...message,
                 origination: {
                     ...message.origination,
                     script: origination.script,
-                }
-            }
-
+                },
+            };
         }
     }
 
-
-    // delegation 
-    if (operation.hasOwnProperty('delegation')) {
-
+    // delegation
+    if (operation.delegation) {
         const delegation = operation.delegation;
 
-        // validate delegation paramaters 
+        // validate delegation paramaters
         validateParams(delegation, [
             { name: 'source', obligatory: true },
             { name: 'delegate', obligatory: true },
@@ -185,13 +173,13 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
             { name: 'storage_limit', obligatory: true },
         ]);
 
-        // validate delegation source paramaters 
+        // validate delegation source paramaters
         validateParams(delegation.source, [
             { name: 'tag', obligatory: true },
             { name: 'hash', obligatory: true },
         ]);
 
-        // validate delegation delegate paramaters 
+        // validate delegation delegate paramaters
         validateParams(delegation.source, [
             { name: 'tag', obligatory: true },
             { name: 'hash', obligatory: true },
@@ -210,8 +198,8 @@ export const createTx = (address_n: Array<number>, branch: Array<number>, operat
                 gas_limit: delegation.gas_limit,
                 storage_limit: delegation.storage_limit,
             },
-        }
+        };
     }
 
-    return message
-}
+    return message;
+};
