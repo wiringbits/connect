@@ -111,7 +111,7 @@ export default class TezosGetPublicKey extends AbstractMethod {
             responses.push({
                 path: this.params.bundle[i].path,
                 serializedPath: getSerializedPath(this.params.bundle[i].path),
-                publicKey: response.public_key
+                publicKey: response.public_key,
             });
 
             if (this.params.bundledResponse) {

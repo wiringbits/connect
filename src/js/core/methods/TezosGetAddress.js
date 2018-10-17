@@ -111,7 +111,7 @@ export default class TezosGetAddress extends AbstractMethod {
             responses.push({
                 path: this.params.bundle[i].path,
                 serializedPath: getSerializedPath(this.params.bundle[i].path),
-                address: response.address
+                address: response.address,
             });
 
             if (this.params.bundledResponse) {
