@@ -15,19 +15,20 @@ export const createTx = (address_n: Array<number>, branch: string, operation: Te
     if (operation.reveal) {
         const reveal = operation.reveal;
 
-        // validate reveal paramaters
+        // validate reveal parameters
         validateParams(reveal, [
             { name: 'source', obligatory: true },
-            { name: 'public_key', obligatory: true },
-            { name: 'counter', obligatory: true },
-            { name: 'gas_limit', obligatory: true },
-            { name: 'storage_limit', obligatory: true },
+            { name: 'fee', type: 'number', obligatory: true },
+            { name: 'counter', type: 'number', obligatory: true },
+            { name: 'gas_limit', type: 'number', obligatory: true },
+            { name: 'storage_limit', type: 'number', obligatory: true },
+            { name: 'public_key', type: 'string', obligatory: true },
         ]);
 
-        // validate reveal source paramaters
+        // validate reveal source parameters
         validateParams(reveal.source, [
             { name: 'tag', obligatory: true },
-            { name: 'hash', obligatory: true },
+            { name: 'hash', type: 'string', obligatory: true },
         ]);
 
         message = {
@@ -50,27 +51,27 @@ export const createTx = (address_n: Array<number>, branch: string, operation: Te
     if (operation.transaction) {
         const transaction = operation.transaction;
 
-        // validate transaction paramaters
+        // validate transaction parameters
         validateParams(transaction, [
             { name: 'source', obligatory: true },
             { name: 'destination', obligatory: true },
-            { name: 'counter', obligatory: true },
-            { name: 'fee', obligatory: true },
-            { name: 'amount', obligatory: true },
-            { name: 'gas_limit', obligatory: true },
-            { name: 'storage_limit', obligatory: true },
+            { name: 'amount', type: 'number', obligatory: true },
+            { name: 'counter', type: 'number', obligatory: true },
+            { name: 'fee', type: 'number', obligatory: true },
+            { name: 'gas_limit', type: 'number', obligatory: true },
+            { name: 'storage_limit', type: 'number', obligatory: true },
         ]);
 
-        // validate transaction source paramaters
+        // validate transaction source parameters
         validateParams(transaction.source, [
             { name: 'tag', obligatory: true },
-            { name: 'hash', obligatory: true },
+            { name: 'hash', type: 'string', obligatory: true },
         ]);
 
-        // validate transaction destination paramaters
+        // validate transaction destination parameters
         validateParams(transaction.destination, [
             { name: 'tag', obligatory: true },
-            { name: 'hash', obligatory: true },
+            { name: 'hash', type: 'string', obligatory: true },
         ]);
 
         message = {
@@ -85,8 +86,8 @@ export const createTx = (address_n: Array<number>, branch: string, operation: Te
                     hash: transaction.source.hash,
                 },
                 amount: transaction.amount,
-                fee: transaction.fee,
                 counter: transaction.counter,
+                fee: transaction.fee,
                 gas_limit: transaction.gas_limit,
                 storage_limit: transaction.storage_limit,
             },
@@ -108,24 +109,24 @@ export const createTx = (address_n: Array<number>, branch: string, operation: Te
     if (operation.origination) {
         const origination = operation.origination;
 
-        // validate origination paramaters
+        // validate origination parameters
         validateParams(origination, [
             { name: 'source', obligatory: true },
             { name: 'manager_pubkey', obligatory: true },
-            { name: 'balance', obligatory: true },
-            { name: 'fee', obligatory: true },
-            { name: 'counter', obligatory: true },
-            { name: 'gas_limit', obligatory: true },
-            { name: 'storage_limit', obligatory: true },
-            { name: 'spendable', obligatory: true },
-            { name: 'delegatable', obligatory: true },
+            { name: 'balance', type: 'number', obligatory: true },
+            { name: 'spendable', type: 'boolean', obligatory: true },
+            { name: 'delegatable', type: 'boolean', obligatory: true },
             { name: 'delegate', obligatory: true },
+            { name: 'fee', type: 'number', obligatory: true },
+            { name: 'counter', obligatory: true },
+            { name: 'gas_limit', type: 'number', obligatory: true },
+            { name: 'storage_limit', type: 'number', obligatory: true },
         ]);
 
-        // validate origination source paramaters
+        // validate origination source parameters
         validateParams(origination.source, [
             { name: 'tag', obligatory: true },
-            { name: 'hash', obligatory: true },
+            { name: 'hash', type: 'string', obligatory: true },
         ]);
 
         message = {
@@ -137,13 +138,13 @@ export const createTx = (address_n: Array<number>, branch: string, operation: Te
                 },
                 manager_pubkey: origination.manager_pubkey,
                 balance: origination.balance,
+                spendable: origination.spendable,
+                delegatable: origination.delegatable,
+                delegate: origination.delegate,
                 fee: origination.fee,
                 counter: origination.counter,
                 gas_limit: origination.gas_limit,
                 storage_limit: origination.storage_limit,
-                spendable: origination.spendable,
-                delegatable: origination.delegatable,
-                delegate: origination.delegate,
             },
         };
 
@@ -163,26 +164,26 @@ export const createTx = (address_n: Array<number>, branch: string, operation: Te
     if (operation.delegation) {
         const delegation = operation.delegation;
 
-        // validate delegation paramaters
+        // validate delegation parameters
         validateParams(delegation, [
             { name: 'source', obligatory: true },
             { name: 'delegate', obligatory: true },
-            { name: 'fee', obligatory: true },
-            { name: 'counter', obligatory: true },
-            { name: 'gas_limit', obligatory: true },
-            { name: 'storage_limit', obligatory: true },
+            { name: 'fee', type: 'number', obligatory: true },
+            { name: 'counter', type: 'number', obligatory: true },
+            { name: 'gas_limit', type: 'number', obligatory: true },
+            { name: 'storage_limit', type: 'number', obligatory: true },
         ]);
 
-        // validate delegation source paramaters
+        // validate delegation source parameters
         validateParams(delegation.source, [
             { name: 'tag', obligatory: true },
-            { name: 'hash', obligatory: true },
+            { name: 'hash', type: 'string', obligatory: true },
         ]);
 
-        // validate delegation delegate paramaters
-        validateParams(delegation.source, [
+        // validate delegation delegate parameters
+        validateParams(delegation.delegate, [
             { name: 'tag', obligatory: true },
-            { name: 'hash', obligatory: true },
+            { name: 'hash', type: 'string', obligatory: true },
         ]);
 
         message = {

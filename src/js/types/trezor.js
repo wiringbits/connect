@@ -514,7 +514,7 @@ export type TezosRevealOp = {
     counter: number,
     gas_limit: number,
     storage_limit: number,
-    public_key: Array<number>,
+    public_key: string,
 }
 
 export type TezosTransactionOp = {
