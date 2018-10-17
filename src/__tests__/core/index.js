@@ -4,6 +4,9 @@ import type {
     AvailableTestFunctions,
 } from 'flowtype/tests';
 
+import { cardanoGetAddress } from './cardanoGetAddress.spec.js';
+import { cardanoGetPublicKey } from './cardanoGetPublicKey.spec.js';
+import { cardanoSignTransaction } from './cardanoSignTransaction.spec.js';
 import { getPublicKey } from './getPublicKey.spec.js';
 import { getAddress } from './getAddress.spec.js';
 import { getAddressSegwit } from './getAddressSegwit.spec.js';
@@ -33,8 +36,17 @@ import { tezosGetPublicKey } from './tezosGetPublicKey.spec.js';
 import { tezosSignTransaction } from './tezosSignTransaction.spec.js';
 
 import { passphrase } from './passphrase.spec.js';
+import { liskGetAddress } from './liskGetAddress.spec.js';
+import { liskSignMessage } from './liskSignMessage.spec.js';
+import { liskVerifyMessage } from './liskVerifyMessage.spec.js';
+import { liskSignTransaction } from './liskSignTransaction.spec.js';
+import { rippleGetAddress } from './rippleGetAddress.spec.js';
+import { rippleSignTransaction } from './rippleSignTransaction.spec.js';
 
 export const testFunctions: AvailableTestFunctions = {
+    cardanoGetAddress,
+    cardanoGetPublicKey,
+    cardanoSignTransaction,
     getPublicKey,
     getAddress,
     getAddressSegwit,
@@ -63,4 +75,10 @@ export const testFunctions: AvailableTestFunctions = {
     tezosGetPublicKey,
     tezosSignTransaction,
     passphrase,
+    liskGetAddress,
+    liskSignMessage,
+    liskVerifyMessage,
+    liskSignTransaction,
+    rippleGetAddress,
+    rippleSignTransaction,
 };

@@ -1,10 +1,40 @@
+# 5.0.34
+__fixed__
+- Unicode character in regexp, (https://github.com/trezor/connect/pull/229)
+
+# 5.0.33
+__fixed__
+- `TrezorConnect.ethereumSignMessage` and `TrezorConnect.ethereumVerifyMessage` methods with "hex" parameter
+- flowtype for `TrezorConnect.cardanoGetPublicKey` in `TrezorConnect.cardanoSignTransaction` methods
+
+# 5.0.32
+__added__
+- Added `TrezorConnect.cardanoGetPublicKey` method
+- Ability to sign hexed ethereum message
+- `network` parameter to `TrezorConnect.cardanoSignTransaction` method
+__fixed__
+- TRANSPORT.ERROR event when computer goes to sleep
+- finding backend by name instead of urls
+- proper FW version for Lisk and Stellar
+__removed__
+- Removed `TrezorConnect.cardanoSignMessage` method
+- Removed `TrezorConnect.cardanoVerifyMessage` method
+
 # 5.0.31
 __added__
+- Support for Cardano
+- Support for Ripple
+- Support for Lisk
 - Exception for not supported firmware when value for "trezor1" or "trezor2" inside coins.json is not set
 - Disable customMessage method for devices with official firmware
+- Added new field in `TrezorConnect.signEthereumTransaction` for `Wanchain`
+__changed__
+- Separate "getPublicKey" and "getAddress" methods for all coins
 __fixed__
 - Device state verification while using multiple instances with the same passphrase
 - ConnectSettings sensitive settings verification in DataManager
+- removed package-lock.json from repository
+
 
 # 5.0.30
 __added__

@@ -6,16 +6,6 @@ import type {
 } from 'flowtype/tests/cardano-get-address';
 
 import type {
-    TestCardanoSignMessagePayload,
-    ExpectedCardanoSignMessageResponse,
-} from 'flowtype/tests/cardano-sign-message';
-
-import type {
-    TestCardanoVerifyMessagePayload,
-    ExpectedCardanoVerifyMessageResponse,
-} from 'flowtype/tests/cardano-verify-message';
-
-import type {
     TestCardanoSignTransactionPayload,
     ExpectedCardanoSignTransactionResponse,
 } from 'flowtype/tests/cardano-sign-transaction';
@@ -24,6 +14,11 @@ import type {
     TestEthereumGetAddressPayload,
     ExpectedEthereumGetAddressResponse,
 } from 'flowtype/tests/ethereum-get-address';
+
+import type {
+    TestCardanoGetPublicKeyPayload,
+    ExpectedCardanoGetPublicKeyResponse,
+} from 'flowtype/tests/cardano-get-public-key';
 
 import type {
     TestEthereumSignMessagePayload,
@@ -95,6 +90,36 @@ import type {
     ExpectedTezosSignTransactionResponse,
 } from 'flowtype/tests/tezos-sign-transaction';
 
+import type {
+    TestLiskGetAddressPayload,
+    ExpectedLiskGetAddressResponse,
+} from 'flowtype/tests/lisk-get-address';
+
+import type {
+    TestLiskSignMessagePayload,
+    ExpectedLiskSignMessageResponse,
+} from 'flowtype/tests/lisk-sign-message';
+
+import type {
+    TestLiskVerifyMessagePayload,
+    ExpectedLiskVerifyMessageResponse,
+} from 'flowtype/tests/lisk-verify-message';
+
+import type {
+    TestLiskSignTransactionPayload,
+    ExpectedLiskSignTransactionResponse,
+} from 'flowtype/tests/lisk-sign-transaction';
+
+import type {
+    TestRippleGetAddressPayload,
+    ExpectedRippleGetAddressResponse,
+} from 'flowtype/tests/ripple-get-address';
+
+import type {
+    TestRippleSignTransactionPayload,
+    ExpectedRippleSignTransactionResponse,
+} from 'flowtype/tests/ripple-sign-transaction';
+
 declare module 'flowtype/tests' {
     // declare export type GetAddressAvailableSubtests = 'btc' | 'ltc' | 'tbtc' | 'bch';
     // declare export type GetAddressSegwitAvailableSubtests = 'showSegwit';
@@ -144,11 +169,11 @@ declare module 'flowtype/tests' {
     declare export type SubtestNemSignTransaction = Subtest<TestNemSignTransactionPayload, ExpectedNemSignTransactionResponse>;
     declare export type SubtestTezosSignTransaction = Subtest<TestTezosSignTransactionPayload, ExpectedTezosSignTransactionResponse>;
     declare export type SubtestPassphrase = Subtest<TestPassphrasePayload, ExpectedPassphraseResponse>;
+    declare export type SubtestLiskSignTransaction = Subtest<TestLiskSignTransactionPayload, ExpectedLiskSignTransactionResponse>;
 
     declare export type TestPayload =
-        TestCardanoSignMessagePayload
-        | TestCardanoVerifyMessagePayload
-        | TestCardanoGetAddressPayload
+        TestCardanoGetAddressPayload
+        | TestCardanoGetPublicKeyPayload
         | TestCardanoSignTransactionPayload
         | TestEthereumGetAddressPayload
         | TestEthereumSignMessagePayload
@@ -164,11 +189,17 @@ declare module 'flowtype/tests' {
         | TestTezosGetAddressPayload
         | TestTezosGetPublicKeyPayload
         | TestTezosSignTransactionPayload
-        | TestPassphrasePayload;
+        | TestPassphrasePayload
+        | TestLiskGetAddressPayload
+        | TestLiskSignMessagePayload
+        | TestLiskVerifyMessagePayload
+        | TestLiskSignTransactionPayload
+        | TestRippleGetAddressPayload
+        | TestRippleSignTransactionPayload;
+
     declare export type ExpectedResponse =
-        ExpectedCardanoSignMessageResponse
-        | ExpectedCardanoVerifyMessageResponse
-        | ExpectedCardanoGetAddressResponse
+        ExpectedCardanoGetAddressResponse
+        | ExpectedCardanoGetPublicKeyResponse
         | ExpectedCardanoSignTransactionResponse
         | ExpectedEthereumGetAddressResponse
         | ExpectedEthereumSignMessageResponse
@@ -184,7 +215,13 @@ declare module 'flowtype/tests' {
         | ExpectedTezosGetAddressResponse
         | ExpectedTezosGetPublicKeyResponse
         | ExpectedTezosSignTransactionResponse
-        | ExpectedPassphraseResponse;
+        | ExpectedPassphraseResponse
+        | ExpectedLiskGetAddressResponse
+        | ExpectedLiskSignMessageResponse
+        | ExpectedLiskVerifyMessageResponse
+        | ExpectedLiskSignTransactionResponse
+        | ExpectedRippleGetAddressResponse
+        | ExpectedRippleSignTransactionResponse;
 
     declare export type SubtestFunction = SubtestGetAddress
     | SubtestSignMessage
@@ -194,7 +231,8 @@ declare module 'flowtype/tests' {
     | SubtestGetAccountInfo
     | SubtestNemSignTransaction
     | SubtestTezosSignTransaction
-    | SubtestPassphrase;
+    | SubtestPassphrase
+    | SubtestLiskSignTransaction;
 
     declare export type TestFunction = {
         testName: string,
@@ -229,5 +267,11 @@ declare module 'flowtype/tests' {
         nemSignTransactionOthers(): TestFunction,
         nemSignTransactionTransfers(): TestFunction,
         passphrase(): TestFunction,
+        liskGetAddress(): TestFunction,
+        liskSignMessage(): TestFunction,
+        liskVerifyMessage(): TestFunction,
+        liskSignTransaction(): TestFunction,
+        rippleGetAddress(): TestFunction,
+        rippleSignTransaction(): TestFunction,
     };
 }
