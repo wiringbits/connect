@@ -252,6 +252,12 @@ export type StellarGetAddress = typeof F_StellarGetAddress;
 export type StellarSignTransaction = (STELLAR.$StellarSignTransaction) => Promise<STELLAR.StellarSignTransaction$>;
 export type VerifyMessage = (P.$VerifyMessage) => Promise<R.VerifyMessage$>;
 export type WipeDevice = (P.$WipeDevice) => Promise<R.WipeDevice$>;
+export type ApplyFlags = (P.$ApplyFlags) => Promise<R.ApplyFlags$>;
+export type ApplySettings = (P.$ApplySettings) => Promise<R.ApplySettings$>;
+export type BackupDevice = (P.$BackupDevice) => Promise<R.BackupDevice$>;
+export type ChangePin = (P.$ChangePin) => Promise<R.ChangePin$>;
+export type FirmwareErase = (P.$FirmwareErase) => Promise<R.FirmwareErase$>;
+export type FirmwareUpload = (P.$FirmwareUpload) => Promise<R.FirmwareUpload$>;
 
 // export * from './params';
 export * from './response';

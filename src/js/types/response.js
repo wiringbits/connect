@@ -178,3 +178,33 @@ export type WipeDevice$ = {
     success: true,
     payload: Success,
 } | Unsuccessful$;
+
+export type ApplyFlags$ = {
+    success: true,
+    payload: Success,
+} | Unsuccessful$;
+
+export type ApplySettings$ = {
+    success: true,
+    payload: Success,
+} | Unsuccessful$;
+
+export type BackupDevice$ = {
+    success: true,
+    payload: Success,
+} | Unsuccessful$;
+
+export type ChangePin$ = {
+    success: true,
+    payload: Success,
+} | Unsuccessful$;
+
+export type FirmwareErase$ = {
+    success: true,
+    payload: Success,
+} | Unsuccessful$;
+
+export type FirmwareUpload$ = {
+    success: true,
+    payload: Success,
+} | Unsuccessful$;

@@ -516,13 +516,13 @@ export default class Device extends EventEmitter {
 
     hasUnexpectedMode(requiredFirmware: Array<string>, allow: Array<string>): ?(typeof UI.BOOTLOADER | typeof UI.INITIALIZE | typeof UI.SEEDLESS | typeof UI.FIRMWARE | typeof UI.FIRMWARE_NOT_SUPPORTED) {
         if (this.features) {
-            if (this.isBootloader() && allow.indexOf(UI.BOOTLOADER) < 0) {
+            if (this.isBootloader() && !allow.includes(UI.BOOTLOADER)) {
                 return UI.BOOTLOADER;
             }
-            if (!this.isInitialized() && allow.indexOf(UI.INITIALIZE) < 0) {
+            if (!this.isInitialized() && !allow.includes(UI.INITIALIZE)) {
                 return UI.INITIALIZE;
             }
-            if (this.isSeedless() && allow.indexOf(UI.SEEDLESS) < 0) {
+            if (this.isSeedless() && !allow.includes(UI.SEEDLESS)) {
                 return UI.SEEDLESS;
             }
             if (requiredFirmware[ this.features.major_version - 1 ] === '0') {
